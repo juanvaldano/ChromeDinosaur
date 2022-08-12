@@ -2,7 +2,12 @@
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] GameObject enemyPrefab;
+    GameObject enemyPrefab;
+
+    private void Start()
+    {
+        enemyPrefab = Resources.Load<GameObject>("Prefabs/Enemy");
+    }
 
     public void SpawnEnemy()
     {

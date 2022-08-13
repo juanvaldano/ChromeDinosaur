@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        SpawnManager.SMInstance.AddEnemyToQueue(gameObject);
+        gameObject.SetActive(false);
     }
 }

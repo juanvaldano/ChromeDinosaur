@@ -164,8 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcc6d3ad40f54445bbf511983c86c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1311837722852956245, guid: 44dcf17fc44e93b4dbc479326e21873e,
-    type: 3}
 --- !u!1 &510939266
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,8 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcc6d3ad40f54445bbf511983c86c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1311837722852956245, guid: 44dcf17fc44e93b4dbc479326e21873e,
-    type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +747,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.17416215, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 0}
   m_Sprites: []
@@ -817,3 +813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead49c8b5b888fc4b9569ea9e1ea9f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialSpawnTime: 1
+  intervalSpawnTime: 3
+  enemyAmount: 5

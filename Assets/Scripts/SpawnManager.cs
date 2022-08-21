@@ -7,6 +7,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float intervalSpawnTime = 3f;
     [SerializeField] int enemyAmount = 5;
 
+    /*A queue was used rather than a list since it accomplishes the specific
+    purpose we're after and it's more function appropriate*/
     private Queue<GameObject> enemyQueue;
     private Spawner[] spawners;
 
@@ -20,24 +22,33 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(gameObject);
             SMInstance = this;
         }
 
         enemyQueue = new Queue<GameObject>();
         InitiateEnemyQueue();
         spawners = GetComponentsInChildren<Spawner>();
-        InvokeRepeating("OrderSpawn", initialSpawnTime, intervalSpawnTime);
+
+        if(!Utils.AllPositiveValues(initialSpawnTime, intervalSpawnTime))
+        {
+            Debug.LogError("Float values for spawn start must be positive");
+        }
+        else
+        {
+            InvokeRepeating("OrderSpawn", initialSpawnTime, intervalSpawnTime);
+        }
     }
 
     private void InitiateEnemyQueue()
     {
-        if(enemyAmount <= 0)
+        //Guard clause, it stops the program into running into an unexpected error
+        if(!Utils.AllPositiveValues(enemyAmount))
         {
             Debug.LogError("Enemy amount must be a positive integer");
             return;
         }
 
+        //Spawn enemies and add them to the queue
         for(int i=0; i<enemyAmount; i++)
         {
             GameObject enemy = Instantiate(Resources.Load<GameObject>("Prefabs/Enemy"), transform.position, transform.rotation);
@@ -45,12 +56,14 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    //Tell a random spawner to "spawn" an enemy
     private void OrderSpawn()
     {
         int randomValue = Random.Range(0, spawners.Length);
         spawners[randomValue].SpawnEnemy(enemyQueue.Dequeue());
     }
 
+    //Allow enemies to add themselved back to the queue
     public void AddEnemyToQueue(GameObject enemy)
     {
         enemyQueue.Enqueue(enemy);

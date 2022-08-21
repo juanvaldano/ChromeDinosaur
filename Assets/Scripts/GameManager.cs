@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    #region Singleton Pattern
     public static GameManager GMInstance { get; private set; }
 
     private void Awake()
@@ -13,11 +14,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(gameObject);
             GMInstance = this;
         }
     }
+    #endregion
 
+    //Gets the scene with the current name and reloads it
     public void ResetGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

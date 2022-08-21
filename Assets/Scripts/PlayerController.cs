@@ -13,11 +13,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //Allow Jump only when the character is grounded
         if(Input.GetKey(KeyCode.Space) && _isGrounded)
         {
-            ToggleIsGrounded();
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+            Jump();
         }
+    }
+
+    public void Jump()
+    {
+        ToggleIsGrounded();
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
     }
 
     public void ToggleIsGrounded()
